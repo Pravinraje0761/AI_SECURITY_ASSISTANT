@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    width: 340px;
+    padding: 15px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #1a1a2e;
+    color: #e0e0e0;
+    margin: 0;
+  }
+  h2 {
+    color: #e94560;
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    text-align: center;
+  }
+  .status {
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    margin: 8px 0;
+  }
+  .safe { background: #003a00; color: #44ff44; }
+  .dangerous { background: #4a0000; color: #ff4444; }
+  .suspicious { background: #4a3a00; color: #ffaa00; }
+  .unknown { background: #16213e; color: #a0a0a0; }
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border: 1px solid #0f3460;
+    border-radius: 4px;
+    background: #16213e;
+    color: #e0e0e0;
+    margin: 5px 0;
+  }
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #0f3460;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px 0;
+  }
+  button:hover { background: #533483; }
+  .indicators {
+    font-size: 12px;
+    color: #a0a0a0;
+    margin-top: 8px;
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  .indicators li { margin: 3px 0; }
+</style>
+</head>
+<body>
+  <h2>AI Digital Bodyguard</h2>
+  <div id="auth-section">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button id="loginBtn">Sign In</button>
+  </div>
+  <div id="main-section" style="display:none">
+    <div id="current-url" class="status unknown">Scanning...</div>
+    <button id="scanBtn">Scan Current Page</button>
+    <div id="manual-section">
+      <input type="text" id="manual-url" placeholder="Enter URL to scan">
+      <button id="manualScanBtn">Scan URL</button>
+    </div>
+    <div id="indicators" class="indicators"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

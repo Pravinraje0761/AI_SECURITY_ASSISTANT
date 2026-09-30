@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Digital Bodyguard</title>
+  <link rel="stylesheet" href="styles/popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <img src="icons/icon48.png" alt="AI Digital Bodyguard">
+      </div>
+      <h1>AI Digital Bodyguard</h1>
+    </div>
+    
+    <div class="status-section">
+      <div class="status-indicator" id="statusIndicator">
+        <span class="status-dot"></span>
+        <span class="status-text">Protected</span>
+      </div>
+    </div>
+    
+    <div class="scan-section" id="scanSection">
+      <h2>Current Page</h2>
+      <div class="url-display" id="currentUrl">Loading...</div>
+      <div class="scan-result" id="scanResult">
+        <span class="result-icon">⏳</span>
+        <span class="result-text">Analyzing...</span>
+      </div>
+    </div>
+    
+    <div class="stats-section">
+      <div class="stat-item">
+        <span class="stat-label">Pages Scanned</span>
+        <span class="stat-value" id="pagesScanned">0</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Threats Blocked</span>
+        <span class="stat-value" id="threatsBlocked">0</span>
+      </div>
+    </div>
+    
+    <div class="actions-section">
+      <button class="action-btn" id="scanBtn">
+        <span>🔍</span> Scan Current Page
+      </button>
+      <button class="action-btn" id="dashboardBtn">
+        <span>📊</span> Open Dashboard
+      </button>
+      <button class="action-btn" id="settingsBtn">
+        <span>⚙️</span> Settings
+      </button>
+    </div>
+    
+    <div class="footer">
+      <span class="version">v1.0.0</span>
+      <a href="#" id="helpLink">Help</a>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
