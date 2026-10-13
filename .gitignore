@@ -17,3 +17,4 @@ frontend/dist/
 *.db
 *.sqlite3
 *.log
+.pytest_cache/
