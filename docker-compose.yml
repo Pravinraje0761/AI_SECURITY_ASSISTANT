@@ -7,7 +7,8 @@ services:
       - "8000:8000"
     environment:
       - DATABASE_URL=sqlite:///./digital_bodyguard.db
-      - SECRET_KEY=change-this-to-a-random-secret-in-production
+      # Set SECRET_KEY in your shell or a .env file; if empty, the API uses a random per-process key.
+      - SECRET_KEY=${SECRET_KEY:-}
       - DEBUG=False
       - CORS_ORIGINS=["http://localhost:3000","http://localhost:80"]
       - LOG_LEVEL=INFO
