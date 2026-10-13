@@ -1,6 +1,16 @@
-# AI Digital Bodyguard - Working Application
+# AI Digital Bodyguard
 
-A working implementation of the AI-Powered Digital Bodyguard for cyber threat detection.
+[![CI](https://github.com/Pravinraje0761/AI_SECURITY_ASSISTANT/actions/workflows/ci.yml/badge.svg)](https://github.com/Pravinraje0761/AI_SECURITY_ASSISTANT/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+A personal security assistant: a FastAPI service that scores URLs and emails for phishing and
+scams, monitors processes, network connections and new files on the host, and raises alerts,
+with a React dashboard, a desktop app and browser extensions as clients.
+
+> **How detection works.** URL, email and file checks use transparent, rule-based feature
+> scoring (`backend/app/ml/`): suspicious TLDs, look-alike domains, urgency language, and so on.
+> No trained model is loaded. The model designs in `docs/design/` describe how ML classifiers
+> would replace these rules.
 
 ## Quick Start
 
@@ -53,10 +63,9 @@ cd backend
 pip install -r requirements.txt
 ```
 
-2. **Set environment variables:**
+2. **Set environment variables** (optional for local use; set `SECRET_KEY` anywhere shared):
 ```bash
 cp .env.example .env
-# Edit .env with your configuration
 ```
 
 3. **Run the backend:**
@@ -77,59 +86,46 @@ npm install
 npm run dev
 ```
 
-## Features Implemented
+## Components
 
-- ✅ User authentication (register/login)
-- ✅ JWT token-based authentication
-- ✅ Phishing URL detection
-- ✅ React frontend with routing
-- ✅ SQLite database
-- ✅ Docker deployment
+| Folder | What it is |
+|---|---|
+| `backend/` | FastAPI service: auth (JWT), URL/email/file scanning, host monitoring, alerts |
+| `frontend/` | React + Vite dashboard |
+| `desktop/` | Desktop dashboard (launched by `start.py` / `launch_dashboard.pyw`) |
+| `desktop_app/` | PyQt6 system-tray companion with notifications and auto-start |
+| `browser_extensions/` | Chrome and Edge extension (full version) |
+| `extensions/` | Simpler extension variant, including Firefox |
+| `docs/design/` | Requirements, architecture and model design documents |
 
-## API Endpoints
+## API
 
-### Authentication
-- `POST /api/v1/auth/register` - Register new user
-- `POST /api/v1/auth/login` - Login user
-- `GET /api/v1/auth/me` - Get current user info
+| Area | Endpoints |
+|---|---|
+| Auth | `POST /api/v1/auth/register`, `POST /api/v1/auth/login`, `GET /api/v1/auth/me` |
+| Scanning | `POST /api/v1/scan/url`, `GET /api/v1/scan/history` |
+| Email & web protection | `POST /api/v1/protection/analyze-email`, `POST /api/v1/protection/check-url`, history endpoints |
+| Host monitoring | `GET /api/v1/monitoring/{threat,score,resources,processes,connections,startup}`, `POST /api/v1/monitoring/scan-file` |
+| Alerts | `GET /api/v1/alerts/`, acknowledge, counts, monitor start/stop |
+| Health | `GET /health`, `GET /api/v1/dashboard` |
 
-### Scanning
-- `POST /api/v1/scan/url` - Scan URL for phishing
+Interactive documentation: `http://localhost:8000/docs`.
 
-### Health
-- `GET /health` - Health check
+## Tests
 
-## Project Structure
-
+```bash
+cd backend && pip install -r requirements.txt pytest && pytest
 ```
-ai_security assisatajt/
-├── backend/
-│   ├── app/
-│   │   ├── api/          # API routes
-│   │   ├── models/       # Database models
-│   │   ├── schemas/      # Pydantic schemas
-│   │   ├── services/     # Business logic
-│   │   ├── utils/        # Utilities
-│   │   ├── config.py     # Configuration
-│   │   ├── database.py   # Database setup
-│   │   └── main.py       # FastAPI app
-│   ├── requirements.txt
-│   ├── Dockerfile
-│   └── .env
-├── frontend/
-│   ├── src/
-│   │   ├── pages/        # React pages
-│   │   ├── App.tsx
-│   │   └── main.tsx
-│   ├── package.json
-│   ├── Dockerfile
-│   └── index.html
-└── docker-compose.yml
-```
+
+The tests run the API against a throwaway SQLite database: authentication, token checks,
+URL and email scoring, and scan history. CI runs them and builds the dashboard on every push.
 
 ## Notes
 
-- TypeScript lint errors in the frontend are expected until `npm install` is run
 - The application uses SQLite for simplicity in this demo
-- The phishing detection uses a simple rule-based approach for demonstration
-- For production, use PostgreSQL and implement the full ML models from the documentation
+- Detection is rule-based (see the note at the top)
+- For production, use PostgreSQL, set a strong `SECRET_KEY`, and replace the rules with trained models
+
+## License
+
+[MIT](LICENSE)
